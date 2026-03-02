@@ -1,34 +1,30 @@
 #include <iostream>
 using namespace std;
 
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 int main() {
 
-    int a = 25;
-    int b = 75;
-
-    int *pA;
-    int *pB;
-
-    // Pointer menyimpan alamat variabel
-    pA = &a;
-    pB = &b;
+    int x = 10;
+    int y = 20;
 
     cout << "Sebelum ditukar:" << endl;
-    cout << "Nilai a: " << a << endl;
-    cout << "Nilai b: " << b << endl;
-    cout << "Alamat a: " << &a << endl;
-    cout << "Alamat b: " << &b << endl;
+    cout << "Nilai x: " << x << endl;
+    cout << "Nilai y: " << y << endl;
+    cout << "Alamat x: " << &x << endl;
+    cout << "Alamat y: " << &y << endl;
 
-    // Menukar nilai menggunakan pointer
-    int temp = *pA;
-    *pA = *pB;
-    *pB = temp;
+    swap(&x, &y);
 
     cout << endl << "Setelah ditukar:" << endl;
-    cout << "Nilai a: " << a << endl;
-    cout << "Nilai b: " << b << endl;
-    cout << "Alamat a: " << &a << endl;
-    cout << "Alamat b: " << &b << endl;
+    cout << "Nilai x: " << x << endl;
+    cout << "Nilai y: " << y << endl;
+    cout << "Alamat x: " << &x << endl;
+    cout << "Alamat y: " << &y << endl;
 
     return 0;
 }

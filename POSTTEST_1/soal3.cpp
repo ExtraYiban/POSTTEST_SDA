@@ -1,29 +1,10 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-
-    // Deklarasi dan inisialisasi array
-    int primes[7] = {2, 3, 5, 7, 11, 13, 17};
-
-    // Pointer menunjuk ke elemen pertama array
-    int *p = primes;
-
-    cout << "===== ARRAY AWAL =====" << endl;
-
-    // Menampilkan isi array menggunakan pointer
-    for (int i = 0; i < 7; i++) {
-        cout << "Nilai: " << *p
-             << " | Alamat: " << p << endl;
-        p++;
-    }
-
-    // Reset pointer ke awal array
-    p = primes;
-
-    // Membalik isi array menggunakan pointer
-    int *awal = primes;
-    int *akhir = primes + 6;   // elemen terakhir
+// Fungsi untuk membalik array menggunakan pointer
+void reverseArray(int* arr, int n) {
+    int *awal = arr;
+    int *akhir = arr + n - 1;
 
     while (awal < akhir) {
         int temp = *awal;
@@ -33,16 +14,30 @@ int main() {
         awal++;
         akhir--;
     }
+}
 
-    cout << endl << "===== ARRAY SETELAH DIBALIK =====" << endl;
+// Fungsi untuk menampilkan array dan alamat memori
+void tampilkanArray(int* arr, int n) {
+    int *p = arr;
 
-    // Tampilkan kembali isi array
-    p = primes;
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < n; i++) {
         cout << "Nilai: " << *p
              << " | Alamat: " << p << endl;
         p++;
     }
+}
+
+int main() {
+
+    int primes[7] = {2, 3, 5, 7, 11, 13, 17};
+
+    cout << "Array sebelum dibalik:" << endl;
+    tampilkanArray(primes, 7);
+
+    reverseArray(primes, 7);
+
+    cout << endl << "Array setelah dibalik:" << endl;
+    tampilkanArray(primes, 7);
 
     return 0;
 }
