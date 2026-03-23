@@ -12,12 +12,6 @@ struct Hewan {
 	double harga;
 };
 
-void clearInputLine() {
-	char ch;
-	while (cin.get(ch) && ch != '\n') {
-	}
-}
-
 void swapHewan(Hewan *a, Hewan *b) {
 	Hewan temp = *a;
 	*a = *b;
@@ -26,34 +20,36 @@ void swapHewan(Hewan *a, Hewan *b) {
 
 void tampilSemuaData(const Hewan *arr, int n) {
 	if (n == 0) {
-		cout << "\nBelum ada data hewan.\n";
+		cout << endl << "Belum ada data hewan." << endl;
 		return;
 	}
 
-	cout << "\n==================== DATA HEWAN PAWCARE ====================\n";
+	cout << endl << "==================== DATA HEWAN PAWCARE ====================" << endl;
 	cout << left << setw(6) << "ID" << setw(18) << "Nama" << setw(16) << "Jenis"
-		 << setw(8) << "Umur" << "Harga" << '\n';
-	cout << "------------------------------------------------------------\n";
+		 << setw(8) << "Umur" << "Harga" << endl;
+	cout << "------------------------------------------------------------" << endl;
 
 	const Hewan *p = arr;
 	for (int i = 0; i < n; ++i) {
 		cout << left << setw(6) << (p + i)->id << setw(18) << (p + i)->nama << setw(16)
 			 << (p + i)->jenis << setw(8) << (p + i)->umur << "Rp " << fixed
-			 << setprecision(0) << (p + i)->harga << '\n';
+			 << setprecision(0) << (p + i)->harga << endl;
 	}
 }
 
 void tambahDataBaru(Hewan *arr, int &n, int kapasitas) {
 	if (n >= kapasitas) {
-		cout << "\nKapasitas penuh. Data gagal ditambahkan.\n";
+		cout << endl << "Kapasitas penuh. Data gagal ditambahkan." << endl;
 		return;
 	}
 
 	Hewan *target = arr + n;
-	cout << "\nMasukkan data hewan baru\n";
+	cout << endl << "Masukkan data hewan baru" << endl;
 	cout << "ID hewan      : ";
 	cin >> target->id;
-	clearInputLine();
+	char buang;
+	while (cin.get(buang) && buang != 10) {
+	}
 
 	cout << "Nama hewan    : ";
 	getline(cin, target->nama);
@@ -68,7 +64,7 @@ void tambahDataBaru(Hewan *arr, int &n, int kapasitas) {
 	cin >> target->harga;
 
 	++n;
-	cout << "Data hewan berhasil ditambahkan.\n";
+	cout << "Data hewan berhasil ditambahkan." << endl;
 }
 
 void tambahDataDenganResize(Hewan *&arr, int &n, int &kapasitas) {
@@ -88,7 +84,7 @@ void tambahDataDenganResize(Hewan *&arr, int &n, int &kapasitas) {
 	arr = arrBaru;
 	kapasitas = kapasitasBaru;
 
-	cout << "\nKapasitas diperbesar menjadi " << kapasitas << " data.\n";
+	cout << endl << "Kapasitas diperbesar menjadi " << kapasitas << " data." << endl;
 	tambahDataBaru(arr, n, kapasitas);
 }
 
@@ -97,7 +93,7 @@ int linearSearchNama(Hewan *arr, int n, const string &namaDicari) {
 		if ((arr + i)->nama == namaDicari) {
 			if (i != 0) {
 				swapHewan(arr, arr + i);
-				cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer).\n";
+				cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer)." << endl;
 				return 0;
 			}
 			return i;
@@ -141,7 +137,7 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 	while (fibM > 1) {
 		int i = min(offset + fibMm2, n - 1);
 		cout << "Iterasi " << iterasi++ << ": cek index " << i << " (ID=" << (arr + i)->id
-			 << ")\n";
+			 << ")" << endl;
 
 		if ((arr + i)->id < idDicari) {
 			fibM = fibMm1;
@@ -155,7 +151,7 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 		} else {
 			if (i != 0) {
 				swapHewan(arr, arr + i);
-				cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer).\n";
+				cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer)." << endl;
 				return 0;
 			}
 			return i;
@@ -165,10 +161,10 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 	if (fibMm1 && offset + 1 < n && (arr + (offset + 1))->id == idDicari) {
 		int idx = offset + 1;
 		cout << "Iterasi " << iterasi << ": cek index " << idx << " (ID=" << (arr + idx)->id
-			 << ")\n";
+			 << ")" << endl;
 		if (idx != 0) {
 			swapHewan(arr, arr + idx);
-			cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer).\n";
+			cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer)." << endl;
 			return 0;
 		}
 		return idx;
@@ -207,11 +203,11 @@ void selectionSortHargaMurah(Hewan *arr, int n) {
 }
 
 void tampilDataSingle(const Hewan *h) {
-	cout << "ID      : " << h->id << '\n';
-	cout << "Nama    : " << h->nama << '\n';
-	cout << "Jenis   : " << h->jenis << '\n';
-	cout << "Umur    : " << h->umur << " tahun\n";
-	cout << "Harga   : Rp " << fixed << setprecision(0) << h->harga << "\n";
+	cout << "ID      : " << h->id << endl;
+	cout << "Nama    : " << h->nama << endl;
+	cout << "Jenis   : " << h->jenis << endl;
+	cout << "Umur    : " << h->umur << " tahun" << endl;
+	cout << "Harga   : Rp " << fixed << setprecision(0) << h->harga << endl;
 }
 
 int main() {
@@ -227,17 +223,20 @@ int main() {
 
 	int pilihan;
 	do {
-		cout << "\n========== MENU PAWCARE PETSHOP =========="
-			 << "\n1. Tampil semua data hewan"
-			 << "\n2. Tambah data hewan baru"
-			 << "\n3. Linear Search berdasarkan nama"
-			 << "\n4. Fibonacci Search berdasarkan ID"
-			 << "\n5. Bubble Sort nama (A-Z)"
-			 << "\n6. Selection Sort harga (termurah)"
-			 << "\n0. Keluar"
-			 << "\nPilih menu: ";
+		cout << endl
+			 << "========== MENU PAWCARE PETSHOP ==========" << endl
+			 << "1. Tampil semua data hewan" << endl
+			 << "2. Tambah data hewan baru" << endl
+			 << "3. Linear Search berdasarkan nama" << endl
+			 << "4. Fibonacci Search berdasarkan ID" << endl
+			 << "5. Bubble Sort nama (A-Z)" << endl
+			 << "6. Selection Sort harga (termurah)" << endl
+			 << "0. Keluar" << endl
+			 << "Pilih menu: ";
 		cin >> pilihan;
-		   clearInputLine();
+		   char buang;
+		   while (cin.get(buang) && buang != 10) {
+		   }
 
 		if (pilihan == 1) {
 			tampilSemuaData(data, jumlah);
@@ -245,19 +244,19 @@ int main() {
 			tambahDataDenganResize(data, jumlah, kapasitas);
 		} else if (pilihan == 3) {
 			string namaCari;
-			cout << "\nMasukkan nama hewan yang dicari: ";
+			cout << endl << "Masukkan nama hewan yang dicari: ";
 			getline(cin, namaCari);
 
 			int idx = linearSearchNama(data, jumlah, namaCari);
 			if (idx != -1) {
-				cout << "Data hewan ditemukan:\n";
+				cout << "Data hewan ditemukan:" << endl;
 				tampilDataSingle(data + idx);
 			} else {
-				cout << "Data hewan dengan nama tersebut tidak ditemukan.\n";
+				cout << "Data hewan dengan nama tersebut tidak ditemukan." << endl;
 			}
 		} else if (pilihan == 4) {
 			int idCari;
-			cout << "\nMasukkan ID hewan yang dicari: ";
+			cout << endl << "Masukkan ID hewan yang dicari: ";
 			cin >> idCari;
 
 			Hewan *temp = new Hewan[jumlah];
@@ -267,25 +266,25 @@ int main() {
 
 			sortIdAsc(temp, jumlah);
 
-			cout << "\nProses Fibonacci Search:\n";
+			cout << endl << "Proses Fibonacci Search:" << endl;
 			int idx = fibonacciSearchById(temp, jumlah, idCari);
 			if (idx != -1) {
-				cout << "Data hewan ditemukan:\n";
+				cout << "Data hewan ditemukan:" << endl;
 				tampilDataSingle(temp + idx);
 			} else {
-				cout << "Data hewan dengan ID tersebut tidak ditemukan.\n";
+				cout << "Data hewan dengan ID tersebut tidak ditemukan." << endl;
 			}
 			delete[] temp;
 		} else if (pilihan == 5) {
 			bubbleSortNamaAZ(data, jumlah);
-			cout << "Data berhasil diurutkan berdasarkan nama (A-Z).\n";
+			cout << "Data berhasil diurutkan berdasarkan nama (A-Z)." << endl;
 		} else if (pilihan == 6) {
 			selectionSortHargaMurah(data, jumlah);
-			cout << "Data berhasil diurutkan berdasarkan harga (termurah).\n";
+			cout << "Data berhasil diurutkan berdasarkan harga (termurah)." << endl;
 		} else if (pilihan == 0) {
-			cout << "Program selesai.\n";
+			cout << "Program selesai." << endl;
 		} else {
-			cout << "Pilihan tidak valid.\n";
+			cout << "Pilihan tidak valid." << endl;
 		}
 	} while (pilihan != 0);
 
