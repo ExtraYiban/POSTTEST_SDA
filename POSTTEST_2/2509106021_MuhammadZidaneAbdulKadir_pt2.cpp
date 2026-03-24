@@ -31,9 +31,9 @@ void tampilSemuaData(const Hewan *arr, int n) {
 
 	const Hewan *p = arr;
 	for (int i = 0; i < n; ++i) {
-		cout << left << setw(6) << (p + i)->id << setw(18) << (p + i)->nama << setw(16)
-			 << (p + i)->jenis << setw(8) << (p + i)->umur << "Rp " << fixed
-			 << setprecision(0) << (p + i)->harga << endl;
+		cout << left << setw(6) << (*(p + i)).id << setw(18) << (*(p + i)).nama << setw(16)
+			 << (*(p + i)).jenis << setw(8) << (*(p + i)).umur << "Rp " << fixed
+			 << setprecision(0) << (*(p + i)).harga << endl;
 	}
 }
 
@@ -46,22 +46,22 @@ void tambahDataBaru(Hewan *arr, int &n, int kapasitas) {
 	Hewan *target = arr + n;
 	cout << endl << "Masukkan data hewan baru" << endl;
 	cout << "ID hewan      : ";
-	cin >> target->id;
+	cin >> (*target).id;
 	char buang;
 	while (cin.get(buang) && buang != 10) {
 	}
 
 	cout << "Nama hewan    : ";
-	getline(cin, target->nama);
+	getline(cin, (*target).nama);
 
 	cout << "Jenis hewan   : ";
-	getline(cin, target->jenis);
+	getline(cin, (*target).jenis);
 
 	cout << "Umur (tahun)  : ";
-	cin >> target->umur;
+	cin >> (*target).umur;
 
 	cout << "Harga layanan : ";
-	cin >> target->harga;
+	cin >> (*target).harga;
 
 	++n;
 	cout << "Data hewan berhasil ditambahkan." << endl;
@@ -90,7 +90,7 @@ void tambahDataDenganResize(Hewan *&arr, int &n, int &kapasitas) {
 
 int linearSearchNama(Hewan *arr, int n, const string &namaDicari) {
 	for (int i = 0; i < n; ++i) {
-		if ((arr + i)->nama == namaDicari) {
+		if ((*(arr + i)).nama == namaDicari) {
 			if (i != 0) {
 				swapHewan(arr, arr + i);
 				cout << "Data ditemukan dan dipindah ke indeks 0 (swap pointer)." << endl;
@@ -106,7 +106,7 @@ void sortIdAsc(Hewan *arr, int n) {
 	for (int i = 0; i < n - 1; ++i) {
 		int idxMin = i;
 		for (int j = i + 1; j < n; ++j) {
-			if ((arr + j)->id < (arr + idxMin)->id) {
+			if ((*(arr + j)).id < (*(arr + idxMin)).id) {
 				idxMin = j;
 			}
 		}
@@ -136,15 +136,15 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 
 	while (fibM > 1) {
 		int i = min(offset + fibMm2, n - 1);
-		cout << "Iterasi " << iterasi++ << ": cek index " << i << " (ID=" << (arr + i)->id
+		cout << "Iterasi " << iterasi++ << ": cek index " << i << " (ID=" << (*(arr + i)).id
 			 << ")" << endl;
 
-		if ((arr + i)->id < idDicari) {
+		if ((*(arr + i)).id < idDicari) {
 			fibM = fibMm1;
 			fibMm1 = fibMm2;
 			fibMm2 = fibM - fibMm1;
 			offset = i;
-		} else if ((arr + i)->id > idDicari) {
+		} else if ((*(arr + i)).id > idDicari) {
 			fibM = fibMm2;
 			fibMm1 = fibMm1 - fibMm2;
 			fibMm2 = fibM - fibMm1;
@@ -158,9 +158,9 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 		}
 	}
 
-	if (fibMm1 && offset + 1 < n && (arr + (offset + 1))->id == idDicari) {
+	if (fibMm1 && offset + 1 < n && (*(arr + (offset + 1))).id == idDicari) {
 		int idx = offset + 1;
-		cout << "Iterasi " << iterasi << ": cek index " << idx << " (ID=" << (arr + idx)->id
+		cout << "Iterasi " << iterasi << ": cek index " << idx << " (ID=" << (*(arr + idx)).id
 			 << ")" << endl;
 		if (idx != 0) {
 			swapHewan(arr, arr + idx);
@@ -177,7 +177,7 @@ void bubbleSortNamaAZ(Hewan *arr, int n) {
 	for (int i = 0; i < n - 1; ++i) {
 		bool swapped = false;
 		for (int j = 0; j < n - i - 1; ++j) {
-			if ((arr + j)->nama > (arr + j + 1)->nama) {
+			if ((*(arr + j)).nama > (*(arr + j + 1)).nama) {
 				swapHewan(arr + j, arr + j + 1);
 				swapped = true;
 			}
@@ -192,7 +192,7 @@ void selectionSortHargaMurah(Hewan *arr, int n) {
 	for (int i = 0; i < n - 1; ++i) {
 		int idxMin = i;
 		for (int j = i + 1; j < n; ++j) {
-			if ((arr + j)->harga < (arr + idxMin)->harga) {
+			if ((*(arr + j)).harga < (*(arr + idxMin)).harga) {
 				idxMin = j;
 			}
 		}
@@ -203,11 +203,11 @@ void selectionSortHargaMurah(Hewan *arr, int n) {
 }
 
 void tampilDataSingle(const Hewan *h) {
-	cout << "ID      : " << h->id << endl;
-	cout << "Nama    : " << h->nama << endl;
-	cout << "Jenis   : " << h->jenis << endl;
-	cout << "Umur    : " << h->umur << " tahun" << endl;
-	cout << "Harga   : Rp " << fixed << setprecision(0) << h->harga << endl;
+	cout << "ID      : " << (*h).id << endl;
+	cout << "Nama    : " << (*h).nama << endl;
+	cout << "Jenis   : " << (*h).jenis << endl;
+	cout << "Umur    : " << (*h).umur << " tahun" << endl;
+	cout << "Harga   : Rp " << fixed << setprecision(0) << (*h).harga << endl;
 }
 
 int main() {
