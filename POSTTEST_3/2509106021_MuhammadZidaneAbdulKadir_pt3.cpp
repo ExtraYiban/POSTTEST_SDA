@@ -144,7 +144,6 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 		return -1;
 	}
 
-	// Bentuk bilangan Fibonacci terkecil yang nilainya >= n.
 	int fibMm2 = 0;
 	int fibMm1 = 1;
 	int fibM = fibMm2 + fibMm1;
@@ -157,18 +156,15 @@ int fibonacciSearchById(Hewan *arr, int n, int idDicari) {
 
 	int offset = -1;
 
-	// Iterasi utama: tiap langkah mengecilkan area pencarian berdasarkan nilai ID.
 	while (fibM > 1) {
 		int i = min(offset + fibMm2, n - 1);
 
 		if ((*(arr + i)).id < idDicari) {
-			// Geser ke kanan: kandidat sebelum i tidak mungkin cocok.
 			fibM = fibMm1;
 			fibMm1 = fibMm2;
 			fibMm2 = fibM - fibMm1;
 			offset = i;
 		} else if ((*(arr + i)).id > idDicari) {
-			// Geser ke kiri: kandidat sesudah i tidak mungkin cocok.
 			fibM = fibMm2;
 			fibMm1 = fibMm1 - fibMm2;
 			fibMm2 = fibM - fibMm1;
