@@ -56,7 +56,7 @@ void tampilkanStokSembako(BarangNode* head) {
     // --- LENGKAPI KODE DI SINI ---
 
     if (head == nullptr) {
-        cout << "Gudang kosong" << endl;
+        cout << "Gudang kosong." << endl;
         return;
     }
 
