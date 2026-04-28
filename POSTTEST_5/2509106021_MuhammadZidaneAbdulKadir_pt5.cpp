@@ -55,6 +55,11 @@ BarangNode* tambahBarang(BarangNode* head, string nama, int jumlah) {
 void tampilkanStokSembako(BarangNode* head) {
     // --- LENGKAPI KODE DI SINI ---
 
+    if (head == nullptr) {
+        cout << "Gudang kosong" << endl;
+        return;
+    }
+
     BarangNode *temp = head;
     do {
         cout << "- " << temp->namaBarang << ": " << temp->stok << endl;
