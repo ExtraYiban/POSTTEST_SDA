@@ -55,6 +55,11 @@ BarangNode* tambahBarang(BarangNode* head, string nama, int jumlah) {
 void tampilkanStokSembako(BarangNode* head) {
     // --- LENGKAPI KODE DI SINI ---
 
+    BarangNode *temp = head;
+    do {
+        cout << "- " << temp->namaBarang << ": " << temp->stok << endl;
+        temp = temp->next;
+    } while (temp != head);
 
 
     // -----------------------------
